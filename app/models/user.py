@@ -3,7 +3,7 @@ class User(object):
         self.id = id
         self.password = password
         
-    
+    # __init__ < 생성자
     
     
     
