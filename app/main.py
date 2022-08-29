@@ -5,14 +5,17 @@ basedir = os.path.dirname(os.path.abspath(__file__))
 
 from app.services.calculator import CalculatorService
 from app.services.user import UserService
-from app.services.score import ScoreService
+# from app.services.score import ScoreService
 from app.services.grade import GradeService
+from app.services.pandas_quiz import PandasQuiz
+
 
 def print_menu():
     print("0. 전체프로그램 종료")
     print("1. 계산기 프로그램")
     print("2. 로그인 프로그램") # 입력받은 아이디와 비번 콘솔에 출력하기
     print("3. 학점 프로그램")
+    print("4. 판다스 퀴즈")
     menu = input(' 메뉴 선택 ')
     return menu
 
@@ -46,7 +49,23 @@ def main():
             math = int(input("수학 : "))
             grade = gradeService.get_grade(name, korean, english, math)
             print(f'이름 : {name} 학점 : {grade}')
-        
+                   
+        elif menu == '4':
+            print("판다스 퀴즈풀기")
+            quiz = PandasQuiz()          
+            while 1:
+                quiz_number = input("퀴즈번호 선택, 종료는 0:")
+                if quiz_number == '0':
+                    break
+                elif quiz_number == '1':
+                    quiz.quiz1()
+                elif quiz_number == '2':
+                    quiz.quiz2()
+                elif quiz_number == '3':
+                    quiz.quiz3()
+                elif quiz_number == '4':
+                    quiz.quiz4()
+                    
 
 if __name__ == '__main__':
     main()
