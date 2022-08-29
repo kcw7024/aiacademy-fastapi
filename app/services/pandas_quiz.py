@@ -4,7 +4,7 @@ from icecream import ic
 import pandas as pd
 import random 
 import string
-
+import numpy as np
 
 class PandasQuiz(object):
     def __init__(self) -> None:
@@ -93,31 +93,48 @@ class PandasQuiz(object):
             
     '''
                     
-    def ran_id(self):
-        ran_id = ''
-        for i in range(5) :  #랜덤이름 대소문자 5글자
-            ran_id += str(random.choice(string.ascii_letters)) #string으로 랜덤한문자뽑아냄 
-        return ran_id
+    # def ran_id(self):
+    #     ran_id = ''
+    #     for i in range(5) :  #랜덤이름 대소문자 5글자
+    #         ran_id += str(random.choice(string.ascii_letters)) #string으로 랜덤한문자뽑아냄 
+    #     return ran_id
     
         
-    def ran_score(self):
-        return random.sample(range(0,100), 4)
+    # def ran_score(self):
+    #     return random.sample(range(0,101), 4)
                
                     
-    def quiz4(self) :
-        ic(self.ran_id())
-        ic(self.ran_score())
+    # def quiz4(self) :
+    #     ic(self.ran_id())
+    #     ic(self.ran_score())
         
-        df4 = pd.DataFrame.from_dict({self.ran_id():self.ran_score()},
-                                     orient='index', columns=['국어', '영어', '수학', '사회'])
-        for i in range(9):
-            df4 = pd.concat([df4,pd.DataFrame.from_dict({self.ran_id():self.ran_score()}, 
-                                                        orient='index', columns=['국어', '영어', '수학', '사회'])],axis=0)
-        ic(df4)
+    #     df4 = pd.DataFrame.from_dict({self.ran_id():self.ran_score()},
+    #                                  orient='index', columns=['국어', '영어', '수학', '사회'])
+    #     for i in range(10):
+    #         df4 = pd.concat([df4,pd.DataFrame.from_dict({self.ran_id():self.ran_score()}, 
+    #                                                     orient='index', columns=['국어', '영어', '수학', '사회'])],axis=0)
+    #     ic(df4)
 
-'''    
-    def get_id(self)
+
+
+    #lambda 식    
+    def id(self):
+        # a = [random.choice(string.ascii_letters) for i in range(5)]
+        # return ["".join() for a in range(10)]
+        # "".join :: 오버로딩.
+        return ["".join([random.choice(string.ascii_letters) for i in range(5)]) for i in range(10)]
+        
+    def score(self):
+        return np.random.randint(0,100,(10, 4))
     
-    
-    
-'''
+    def quiz4(self):
+        ic(self.id())
+        ic(self.score())
+        df4 = pd.DataFrame(
+            self.score(), 
+            index=self.id(), 
+            columns=['국어', '영어', '수학', '사회']
+            )
+
+        ic(df4)
+        
