@@ -5,8 +5,9 @@ import random
 import string
 
 class Quiz(object):
-    def __init__(self) -> None:
-        pass
+    # def __init__(self) -> None:
+    #     pass
+    # 디폴트 생성자라서 없어도 되긴함
     
     '''
     Q1. 다음 결과 출력
@@ -117,18 +118,22 @@ class Quiz(object):
     
     '''
     
-    def quiz_5(self) :
-        scores = self.quiz_4()
-        return scores
+    # def quiz_5(self) :
+    #     df5 = pd.DataFrame(self.score(),
+    #                        index = self.id(),
+    #                        columns=['국어'])
+    #     ic(df5)
        
     ''' 
     Q6 원하는 학생점수만 출력하시오. (아이디가 랜덤이므로 맨 위에 학생점수 출력으로 대체함)
         lDZid  57  90  55  24
     '''
-    def quiz_6(self, id) :
-        print(f'{id}의 성적출력') # 당연히 id 가 일치할리 없음. 형식적으로 출력함
-        scores = self.quiz_4()
-    
+    def quiz_6(self):
+        df6 = pd.DataFrame(self.score(),
+                           index = self.id(),
+                           columns=['국어', '영어', '수학', '사회'])
+        ic(df6.iloc[[0]])
+
     '''
     Q7 각 학생들의 점수의 총합과 마지막 행은 과목총점 추가해서 출력
         ic| df5:  국어   영어   수학   사회   과학    총점
@@ -145,4 +150,9 @@ class Quiz(object):
                     과목총점   547  536  533  319  376  2311
     '''
     def quiz_7(self) :
-        scores = self.quiz_4()
+        random_num = np.random.randint(0,101,(10,5))
+        df7 = pd.DataFrame(random_num,index=self.id(),
+                           columns=['국어','영어','수학','사회','과학'])
+        df7['총점'] = df7['국어'] + df7['영어'] + df7['수학'] + df7['사회'] + df7['과학']
+        df7.loc['과목총점']= df7.sum(axis=0)
+        ic(df7)
